@@ -1,0 +1,74 @@
+--CREAR LA BASE DE DATOS
+create database Colegios;
+
+--Usamos la base de datos Colegios
+USE Colegios;
+
+--creamos una tabla Alumnos
+create TABLE Alumnos(
+    codigo VARCHAR(20) PRIMARY KEY,
+    nombre VARCHAR(100),
+    sexo VARCHAR(1),
+    distrito VARCHAR(100),
+    nota1 int,
+    nota2 int,
+    nota3 int,
+    nota4 int,
+    nota5 int
+);
+
+
+
+/*procedimiento para insertar alumnos*/
+DELIMITER $$
+CREATE PROCEDURE registrar_alumnos(IN codigo VARCHAR(20), IN nombre varchar(100), IN sexo varchar(1), IN distrito VARCHAR(100), in nota1 int, in nota2 int, in nota3 int, in nota4 int, in nota5 int)
+BEGIN
+  insert into alumnos values(codigo, nombre, sexo, distrito,nota1,nota2,nota3,nota4,nota5);
+END
+$$
+
+
+
+
+/*procedimiento para listar alumnos*/
+DELIMITER $$
+CREATE PROCEDURE listar_alumnos()
+BEGIN
+  SELECT * FROM alumnos;
+END
+$$
+
+
+
+
+DELIMITER $$
+CREATE PROCEDURE eliminar_alumnos(IN codigo VARCHAR(5))
+BEGIN
+  delete from alumnos where alumnos.codigo = codigo;
+END
+$$
+
+
+
+
+/*procedimiento para buscar alumnos*/ 
+DELIMITER $$ 
+CREATE PROCEDURE buscar_alumnos(IN codigo varchar(20)) 
+BEGIN 
+	SELECT * FROM alumnos WHERE alumnos.codigo = codigo; 
+    
+END $$
+
+
+
+/*procedimiento para actualizar alumnos*/
+DELIMITER $$
+CREATE PROCEDURE actualizar_Notas(IN nota1 int, IN nota2 int,IN nota3 int,in nota4 int,in nota5 int,IN codigo VARCHAR(20))
+BEGIN
+  update alumnos 
+  set alumnos.nota1 = nota1, alumnos.nota2 = nota2, alumnos.nota3 = nota3, alumnos.nota4 = nota4, alumnos.nota5 = nota5
+  where alumnos.codigo = codigo;
+END
+$$
+
+

@@ -1,0 +1,85 @@
+/*procedimiento para insertar ventas*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS registrar_ventas$$
+CREATE PROCEDURE registrar_ventas(IN codigo VARCHAR(5), IN producto varchar(30), 
+IN precio int, IN cantidad int)
+BEGIN
+  insert into ventas values(codigo, producto, precio, cantidad);
+END
+$$
+
+
+
+
+
+/*procedimiento para listar ventas*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS listar_ventas$$
+CREATE PROCEDURE listar_ventas()
+BEGIN
+  SELECT * FROM ventas;
+END
+$$
+
+
+
+----------------------------------------
+/*procedimiento para eliminar ventas*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS eliminar_ventas$$
+
+CREATE PROCEDURE eliminar_ventas(IN codigo VARCHAR(5))
+BEGIN
+  delete from ventas 
+  where ventas.codigo = codigo;
+END
+$$
+
+
+
+
+
+/*procedimiento para buscar ventas*/ 
+DELIMITER $$ 
+DROP PROCEDURE IF EXISTS buscar_ventas$$ 
+CREATE PROCEDURE buscar_ventas(IN codigo varchar(5)) 
+BEGIN SELECT * FROM ventas WHERE ventas.codigo = codigo; 
+END $$
+
+
+
+
+
+/*procedimiento para actualizar ventas*/
+DELIMITER $$
+DROP PROCEDURE IF EXISTS actualizar_ventas$$
+CREATE PROCEDURE actualizar_ventas(IN precio int, IN cantidad int,IN codigo VARCHAR(5))
+BEGIN
+  update ventas 
+  set ventas.precio = precio, ventas.cantidad = cantidad
+  where ventas.codigo = codigo;
+END
+$$
+
+
+------------------------------------
+
+
+
+
+/*procedimiento para actualizar alumnos*/
+DELIMITER $$
+CREATE PROCEDURE actualizar_Notas(IN nota1 int, IN nota2 int,IN nota3 int,in nota4 int,in nota5 int,IN codigo VARCHAR(20))
+BEGIN
+  update alumnos 
+  set alumnos.nota1 = nota1, alumnos.nota2 = nota2, alumnos.nota3 = nota3, alumnos.nota4 = nota4, alumnos.nota5 = nota5
+  where alumnos.codigo = codigo;
+END
+$$
+
+
+
+
+
+
+
